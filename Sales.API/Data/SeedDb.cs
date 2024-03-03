@@ -11,16 +11,18 @@ namespace Sales.API.Data
             _context = context;
         }
 
-        public async Task SeedAsync() 
-        { 
+        public async Task SeedAsync()
+        {
             await _context.Database.EnsureCreatedAsync();
             await CheckCountriesAsync();
         }
 
         private async Task CheckCountriesAsync()
         {
-           if (!_context.Countries.Any()) 
+            if (!_context.Countries.Any())
             {
+
+
                 _context.Countries.Add(new Country { Name = "Afganistán" });
                 _context.Countries.Add(new Country { Name = "Albania" });
                 _context.Countries.Add(new Country { Name = "Alemania" });
@@ -80,7 +82,74 @@ namespace Sales.API.Data
                 _context.Countries.Add(new Country { Name = "Eslovaquia" });
                 _context.Countries.Add(new Country { Name = "Eslovenia" });
                 _context.Countries.Add(new Country { Name = "España" });
-                _context.Countries.Add(new Country { Name = "Estados Unidos" });
+                _context.Countries.Add(new Country
+                {
+                    Name = "Estados Unidos",
+                    States = new List<State>()
+                    {
+                    new State() { Name="Alabama"},
+                    new State() { Name="Alaska"},
+                    new State() { Name="Arizona"},
+                    new State() { Name="Arkansas"},
+                    new State() { Name="California"},
+                    new State() { Name="Colorado"},
+                    new State() { Name="Connecticut"},
+                    new State() { Name="Delaware"},
+                    new State() { Name="Florida"},
+                    new State() { Name="Georgia"},
+                    new State() { Name="Hawái"},
+                    new State() { Name="Idaho"},
+                    new State() { Name="Illinois"},
+                    new State() { Name="Indiana"},
+                    new State() { Name="Iowa"},
+                    new State() { Name="Kansas"},
+                    new State() { Name="Kentucky"},
+                    new State() { Name="Luisiana"},
+                    new State() { Name="Maine"},
+                    new State() { Name="Maryland"},
+                    new State() { Name="Massachusetts"},
+                    new State() { Name="Míchigan"},
+                    new State() { Name="Minnesota"},
+                    new State() { Name="Misisipi"},
+                    new State() { Name="Misuri"},
+                    new State() { Name="Montana"},
+                    new State() { Name="Nebraska"},
+                    new State() { Name="Nevada"},
+                    new State() { Name="Nuevo Hampshire"},
+                    new State() { Name="Nueva Jersey"},
+                    new State() { Name="Nuevo México"},
+                    new State() { Name="Nueva York"},
+                    new State() { Name="Carolina del Norte"},
+                    new State() { Name="Dakota del Norte"},
+                    new State() { Name="Ohio"},
+                    new State() { Name="Oklahoma"},
+                    new State() { Name="Oregón"},
+                    new State() { Name="Pensilvania"},
+                    new State() { Name="Rhode Island"},
+                    new State() { Name="Carolina del Sur"},
+                    new State() { Name="Dakota del Sur" },
+                    new State() { Name="Tennessee"},
+                    new State() 
+                    { 
+                        Name="Texas",
+                        Cities = new List<City>()
+                        {
+                            new City() { Name="Houston"},
+                            new City() { Name="San Antonio"},
+                            new City() { Name="Dallas"},
+                            new City() { Name="El Paso"}
+                        }
+                    },
+                    new State() { Name="Utah"},
+                    new State() { Name="Vermont"},
+                    new State() { Name="Virginia"},
+                    new State() { Name="Washington"},
+                    new State() { Name="Virginia Occidental"},
+                    new State() { Name="Wisconsin"},
+                    new State() { Name="Wyoming"}
+
+                    }
+                });
                 _context.Countries.Add(new Country { Name = "Estonia" });
                 _context.Countries.Add(new Country { Name = "Etiopía" });
                 _context.Countries.Add(new Country { Name = "Filipinas" });
@@ -138,7 +207,49 @@ namespace Sales.API.Data
                 _context.Countries.Add(new Country { Name = "Marruecos" });
                 _context.Countries.Add(new Country { Name = "Mauricio" });
                 _context.Countries.Add(new Country { Name = "Mauritania" });
-                _context.Countries.Add(new Country { Name = "México" });
+
+                _context.Countries.Add(new Country
+                {
+                    Name = "México",
+                    States = new List<State>()
+                     {
+                        new State { Name = "Aguascalientes" },
+                        new State { Name = "Baja California" },
+                        new State { Name = "Baja California Sur" },
+                        new State { Name = "Campeche" },
+                        new State { Name = "Chiapas" },
+                        new State { Name = "Chihuahua" },
+                        new State { Name = "Ciudad de México" },
+                        new State { Name = "Coahuila" },
+                        new State { Name = "Colima" },
+                        new State { Name = "Durango" },
+                        new State { Name = "Estado de México" },
+                        new State { Name = "Guanajuato" },
+                        new State { Name = "Guerrero" },
+                        new State { Name = "Hidalgo" },
+                        new State { Name = "Jalisco" },
+                        new State { Name = "Michoacán" },
+                        new State { Name = "Morelos" },
+                        new State { Name = "Nayarit" },
+                        new State { Name = "Nuevo León" },
+                        new State { Name = "Oaxaca" },
+                        new State { Name = "Puebla" },
+                        new State { Name = "Querétaro" },
+                        new State { Name = "Quintana Roo" },
+                        new State { Name = "San Luis Potosí" },
+                        new State { Name = "Sinaloa" },
+                        new State { Name = "Sonora" },
+                        new State { Name = "Tabasco" },
+                        new State { Name = "Tamaulipas" },
+                        new State { Name = "Tlaxcala" },
+                        new State { Name = "Veracruz" },
+                        new State { Name = "Yucatán" },
+                        new State { Name = "Zacatecas" }
+                        }
+                });
+
+
+
                 _context.Countries.Add(new Country { Name = "Micronesia" });
                 _context.Countries.Add(new Country { Name = "Moldavia" });
                 _context.Countries.Add(new Country { Name = "Mónaco" });

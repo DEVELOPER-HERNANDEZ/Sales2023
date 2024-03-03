@@ -20,7 +20,16 @@ namespace Sales.API.Controllers
         [HttpGet]
         public async Task<IActionResult> GetAsync()
         {
-            return Ok(await _context.Countries.ToListAsync());
+            return Ok(await _context.Countries.Include(x => x.States).ToListAsync());
+        }
+
+        [HttpGet("full")]
+        public async Task<IActionResult> GetFullAsync()
+        {
+            return Ok(await _context.Countries
+                .Include(x => x.States!)
+                .ThenInclude(x => x.Cities)
+                .ToListAsync());
         }
 
         [HttpGet("{id:int}")]
@@ -52,8 +61,9 @@ namespace Sales.API.Controllers
                 return BadRequest(dbUpdateException.InnerException.Message);
 
 
-                
-            }catch (Exception ex)
+
+            }
+            catch (Exception ex)
             {
                 return BadRequest(ex.Message);
             }
