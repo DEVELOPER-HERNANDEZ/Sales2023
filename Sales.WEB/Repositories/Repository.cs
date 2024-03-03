@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using Microsoft.VisualBasic;
+using System.Text;
 using System.Text.Json;
 
 namespace Sales.WEB.Repositories
@@ -56,6 +57,31 @@ namespace Sales.WEB.Repositories
             return JsonSerializer.Deserialize<T>(respuestaString, jsonSerializerOptions)!;
         }
 
-  
+        public async Task<HttpReponseWrapper<object>> Delete(string url)
+        {
+            var reponseHTTP = await _httpClient.DeleteAsync(url);
+            return new HttpReponseWrapper<object>(null,!reponseHTTP.IsSuccessStatusCode, reponseHTTP)!;
+        }
+
+        public async Task<HttpReponseWrapper<object>> Put<T>(string url, T mode)
+        {
+            var messageJSON = JsonSerializer.Serialize(mode);
+            var messageContent = new StringContent(messageJSON,Encoding.UTF8, "application/json");
+            var reponseHTTP = await _httpClient.PutAsync(url, messageContent);
+            return new HttpReponseWrapper<object>(null, !reponseHTTP.IsSuccessStatusCode, reponseHTTP);
+        }
+
+        public async Task<HttpReponseWrapper<TReponse>> Put<T, TReponse>(string url, T mode)
+        {
+            var messageJSON = JsonSerializer.Serialize(mode);
+            var messageContent = new StringContent(messageJSON, Encoding.UTF8, "application/json");
+            var reponseHttp = await _httpClient.PutAsync(url, messageContent);
+            if (reponseHttp.IsSuccessStatusCode)
+            {
+                var reponse = await UnserializeAnswer<TReponse>(reponseHttp, _jsonDefaultOptions);
+                return new HttpReponseWrapper<TReponse>(reponse, false, reponseHttp);
+            }
+            return new HttpReponseWrapper<TReponse>(default, !reponseHttp.IsSuccessStatusCode, reponseHttp);
+        }
     }
 }
