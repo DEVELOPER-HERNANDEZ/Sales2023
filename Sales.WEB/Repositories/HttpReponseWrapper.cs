@@ -20,7 +20,7 @@ namespace Sales.WEB.Repositories
         {
             if (!Error)
             {
-                return null;
+                return null!;
             }
 
             var statusCode = HttpResponseMessage.StatusCode;
